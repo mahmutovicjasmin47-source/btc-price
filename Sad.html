@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BTC Live Price 💲</title>
+  <style>
+    body {
+      background: #0d1117;
+      color: #f0f6fc;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      margin: 0;
+    }
+    h1 {
+      color: #f1c40f;
+      font-size: 2.4em;
+      margin: 0;
+    }
+    #price {
+      font-size: 3em;
+      margin-top: 28px;
+      color: #00ff99;
+    }
+    footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      font-size: 0.9em;
+      color: #8b949e;
+    }
+    button {
+      margin-top: 18px;
+      background: #238636;
+      border: none;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <h1>💰 Bitcoin Live Price (USD)</h1>
+  <div id="price">Loading...</div>
+  <button onclick="loadBTC()">Refresh now</button>
+
+  <footer>Updated every 30 seconds — Jasmin's BTC App ⚡</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
