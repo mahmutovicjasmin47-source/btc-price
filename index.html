@@ -34,13 +34,24 @@
   <div id="price">$00,000.00</div>
   <footer>Updated automatically</footer>
   <script>
-    async function getPrice() {
-      const res = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json');
-      const data = await res.json();
-      document.getElementById('price').innerText = '$' + data.bpi.USD.rate;
-    }
-    getPrice();
-    setInterval(getPrice, 10000);
+    <script>
+async function fetchBTC() {
+  try {
+    const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice/USD.json");
+    const data = await res.json();
+    const price = data.bpi.USD.rate_float.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    document.getElementById("price").innerText = `$${price}`;
+  } catch (error) {
+    console.error("Greška pri dohvaćanju cijene:", error);
+  }
+}
+
+fetchBTC();
+setInterval(fetchBTC, 30000);
+</script>
 </script>
 <script>
 async function fetchBTC() {
