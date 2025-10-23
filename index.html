@@ -45,7 +45,7 @@
 <script>
 async function fetchBTC() {
   try {
-    const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice/USD.json");
+    const res = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json');
     const data = await res.json();
     const price = data.bpi.USD.rate_float.toLocaleString("en-US", {
       minimumFractionDigits: 2,
