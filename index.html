@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTC Live Price 💰</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #f0f6fc;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    h1 {
+      color: #f1c40f;
+    }
+    #price {
+      font-size: 3em;
+      margin-top: 28px;
+      color: #00ff99;
+    }
+    footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      font-size: 0.9em;
+      color: #8b949e;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bitcoin Live Price</h1>
+  <div id="price">$00,000.00</div>
+  <footer>Updated automatically</footer>
+  <script>
+    async function getPrice() {
+      const res = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json');
+      const data = await res.json();
+      document.getElementById('price').innerText = '$' + data.bpi.USD.rate;
+    }
+    getPrice();
+    setInterval(getPrice, 10000);
+  </script>
+</body>
+</html>
