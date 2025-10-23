@@ -41,17 +41,8 @@
     }
     getPrice();
     setInterval(getPrice, 10000);
-  </script><script>
-async function fetchBTC() {
-  const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice/USD.json");
-  const data = await res.json();
-  const price = data.bpi.USD.rate_float.toFixed(2);
-  document.getElementById("price").innerText = `$${price}`;
-}
-
-fetchBTC();
-setInterval(fetchBTC, 30000);
-</script><script>
+</script>
+<script>
 async function fetchBTC() {
   try {
     const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice/USD.json");
