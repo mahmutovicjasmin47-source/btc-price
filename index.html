@@ -30,21 +30,24 @@
 </head>
 <body>
   <h1>Bitcoin Live Price</h1>
-  <div id="price">$00,000.00</div>
+  <div id="price">Loading...</div>
   <footer>Updated automatically</footer>
 
   <script>
     async function fetchBTC() {
       try {
-        const res = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json', { cache: 'no-store' });
-        const data = await res.json();
+        // Proxy servis koji omogućava pristup Coindesk API-ju
+        const proxyUrl = "https://api.allorigins.win/get?url=";
+        const targetUrl = encodeURIComponent("https://api.coindesk.com/v1/bpi/currentprice/USD.json");
+        const res = await fetch(proxyUrl + targetUrl);
+        const dataWrapper = await res.json();
+        const data = JSON.parse(dataWrapper.contents);
 
-        // Coindesk vraća string u "data.bpi.USD.rate" (npr. "66,123.45")
         const priceStr = data.bpi.USD.rate.toString();
-        document.getElementById('price').innerText = `$${priceStr}`;
+        document.getElementById("price").innerText = `$${priceStr}`;
       } catch (err) {
-        console.error('Greška pri dohvaćanju cijene', err);
-        document.getElementById('price').innerText = '—';
+        console.error("Greška pri dohvaćanju cijene:", err);
+        document.getElementById("price").innerText = "Error";
       }
     }
 
