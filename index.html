@@ -36,15 +36,13 @@
   <script>
     async function fetchBTC() {
       try {
-        // Proxy servis koji omogućava pristup Coindesk API-ju
-        const proxyUrl = "https://api.allorigins.win/get?url=";
-        const targetUrl = encodeURIComponent("https://api.coindesk.com/v1/bpi/currentprice/USD.json");
-        const res = await fetch(proxyUrl + targetUrl);
-        const dataWrapper = await res.json();
-        const data = JSON.parse(dataWrapper.contents);
-
-        const priceStr = data.bpi.USD.rate.toString();
-        document.getElementById("price").innerText = `$${priceStr}`;
+        const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+        const data = await res.json();
+        const price = data.bitcoin.usd.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+        document.getElementById("price").innerText = `$${price}`;
       } catch (err) {
         console.error("Greška pri dohvaćanju cijene:", err);
         document.getElementById("price").innerText = "Error";
