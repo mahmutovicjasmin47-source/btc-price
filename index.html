@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BTC Live Price 💰</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BTC Live Price</title>
   <style>
     body {
-      background-color: #0d1117;
+      background: #0d1117;
       color: #f0f6fc;
       font-family: Arial, sans-serif;
       text-align: center;
       padding-top: 100px;
+      margin: 0;
     }
-    h1 {
-      color: #f1c40f;
-    }
+    h1 { color: #f1c40f; }
     #price {
       font-size: 3em;
       margin-top: 28px;
@@ -24,7 +23,7 @@
       position: fixed;
       bottom: 10px;
       width: 100%;
-      font-size: 0.9em;
+      font-size: .9em;
       color: #8b949e;
     }
   </style>
@@ -33,44 +32,24 @@
   <h1>Bitcoin Live Price</h1>
   <div id="price">$00,000.00</div>
   <footer>Updated automatically</footer>
+
   <script>
-    <script>
-async function fetchBTC() {
-  try {
-    const res = await fetch("https://api.coindesk.com/v1/bpi/currentprice/USD.json");
-    const data = await res.json();
-  
-  const price = data.bpi.USD.rate.toString();
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-    document.getElementById("price").innerText = `$${price}`;
-  } catch (error) {
-    console.error("Greška pri dohvaćanju cijene:", error);
-  }
-}
+    async function fetchBTC() {
+      try {
+        const res = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json', { cache: 'no-store' });
+        const data = await res.json();
 
-fetchBTC();
-setInterval(fetchBTC, 30000);
-</script>
-</script>
-<script>
-async function fetchBTC() {
-  try {
-    const res = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json');
-    const data = await res.json();
-    const price = data.bpi.USD.rate_float.toLocaleString("en-US", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-    document.getElementById("price").innerText = `$${price}`;
-  } catch (error) {
-    console.error("Greška pri dohvatanju cijene:", error);
-  }
-}
-fetchBTC();
-setInterval(fetchBTC, 30000);
-</script>
+        // Coindesk vraća string u "data.bpi.USD.rate" (npr. "66,123.45")
+        const priceStr = data.bpi.USD.rate.toString();
+        document.getElementById('price').innerText = `$${priceStr}`;
+      } catch (err) {
+        console.error('Greška pri dohvaćanju cijene', err);
+        document.getElementById('price').innerText = '—';
+      }
+    }
 
+    fetchBTC();
+    setInterval(fetchBTC, 30000);
+  </script>
 </body>
 </html>
